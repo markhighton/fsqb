@@ -1,0 +1,13 @@
+D:\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilderTests.dll
+D:\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilderTests.pdb
+D:\Fluent.SqlBuilderTests\bin\Debug\Castle.Core.dll
+D:\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilder.dll
+D:\Fluent.SqlBuilderTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Fluent.SqlBuilderTests\bin\Debug\Moq.dll
+D:\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilder.pdb
+D:\Fluent.SqlBuilderTests\bin\Debug\Castle.Core.xml
+D:\Fluent.SqlBuilderTests\bin\Debug\Moq.pdb
+D:\Fluent.SqlBuilderTests\bin\Debug\Moq.xml
+D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.csprojResolveAssemblyReference.cache
+D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.dll
+D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.pdb

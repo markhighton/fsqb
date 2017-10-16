@@ -1,0 +1,5 @@
+D:\Fluent.SqlBuilder\bin\Debug\Fluent.SqlBuilder.dll
+D:\Fluent.SqlBuilder\bin\Debug\Fluent.SqlBuilder.pdb
+D:\Fluent.SqlBuilder\obj\Debug\Fluent.SqlBuilder.dll
+D:\Fluent.SqlBuilder\obj\Debug\Fluent.SqlBuilder.pdb
+D:\Fluent.SqlBuilder\obj\Debug\Fluent.SqlBuilder.csprojResolveAssemblyReference.cache
