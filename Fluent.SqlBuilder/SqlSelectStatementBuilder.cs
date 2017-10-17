@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Fluent.SqlBuilder
 {
@@ -8,6 +10,8 @@ namespace Fluent.SqlBuilder
         private string _tableName;
         private string _customColumn;
         private string[] _tableColumns;
+        private IDictionary<string, string[]> _innerJoinTables = new Dictionary<string, string[]>();
+        private IDictionary<string, string[]> _leftJoinTables = new Dictionary<string, string[]>();
 
         public ISqlSelectStatementBuilder WithTableName(string tableName)
         {
@@ -39,7 +43,7 @@ namespace Fluent.SqlBuilder
             switch (type)
             {
                 case SqlSelectType.All:
-                    return $"SELECT {alias}.*";
+                    return BuildSelectAllStatement(alias);
                 case SqlSelectType.Count:
                     return "SELECT COUNT(*)";
                 case SqlSelectType.Specific:
@@ -47,9 +51,51 @@ namespace Fluent.SqlBuilder
                 case SqlSelectType.Custom:
                     return BuildCustomSelectStatment(alias);
                 default:
-                    return $"SELECT {alias}.*";
+                    return BuildSelectAllStatement(alias);
 
             }
+        }
+
+        private string BuildSelectAllStatement(string alias)
+        {
+            var joiningTables = _innerJoinTables.Any() || _leftJoinTables.Any() ? ", " + BuildSelectJoinColumns() : string.Empty;
+            return $"SELECT {alias}.*" + joiningTables;
+        }
+
+        private string BuildSelectJoinColumns()
+        {
+            var joinIndex = 0;
+
+            var tableAliases = new List<string>();
+            foreach (var innerJoinTable in _innerJoinTables)
+            {
+                var innerJoinAlias = innerJoinTable.Key.TableNameAlias();
+                var aliasSelect = $"{innerJoinAlias}{joinIndex}.*";
+                tableAliases.Add(aliasSelect);
+                joinIndex++;
+            }
+
+            foreach (var leftJoinTable in _leftJoinTables)
+            {
+                var leftJoinAlias = leftJoinTable.Key.TableNameAlias();
+                var aliasSelect = $"{leftJoinAlias}{joinIndex}.*";
+                tableAliases.Add(aliasSelect);
+                joinIndex++;
+            }
+
+            return string.Join(", ", tableAliases);
+        }
+
+        public ISqlSelectStatementBuilder WithInnerJoinTables(IDictionary<string, string[]> innerJoinTables)
+        {
+            _innerJoinTables = innerJoinTables;
+            return this;
+        }
+
+        public ISqlSelectStatementBuilder WithLeftJoinTables(IDictionary<string, string[]> leftJoinTables)
+        {
+            _leftJoinTables = leftJoinTables;
+            return this;
         }
 
         private string BuildCustomSelectStatment(string alias)

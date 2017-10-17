@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Fluent.SqlBuilder
 {
     public interface ISqlSelectStatementBuilder
@@ -10,5 +12,7 @@ namespace Fluent.SqlBuilder
         ISqlSelectStatementBuilder WithSelectedColumns(string[] columns);
 
         string Build(SqlSelectType type);
+        ISqlSelectStatementBuilder WithInnerJoinTables(IDictionary<string, string[]> innerJoinTables);
+        ISqlSelectStatementBuilder WithLeftJoinTables(IDictionary<string, string[]> innerJoinTables);
     }
 }

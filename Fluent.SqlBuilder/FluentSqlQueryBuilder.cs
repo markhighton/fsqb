@@ -21,6 +21,8 @@ namespace Fluent.SqlBuilder
         private string _primaryTableName;
         private string _orderByColumn;
         private string _primaryFilterKey;
+        private readonly IDictionary<string, string[]> _innerJoinTables = new Dictionary<string, string[]>();
+        private readonly IDictionary<string, string[]> _leftJoinTables = new Dictionary<string, string[]>();
 
         public FluentSqlQueryBuilder(
             ISqlSelectStatementBuilder sqlSelectStatementBuilder, 
@@ -64,12 +66,14 @@ namespace Fluent.SqlBuilder
 
         public IFluentSqlQueryBuilder InnerJoin(string innerTableName, string leftKey, string rightKey)
         {
-            throw new System.NotImplementedException();
+            _innerJoinTables.Add(innerTableName, new []{ leftKey, rightKey });
+            return this;
         }
 
         public IFluentSqlQueryBuilder LeftJoin(string leftTableName, string leftKey, string rightKey)
         {
-            throw new System.NotImplementedException();
+            _leftJoinTables.Add(leftTableName, new []{  leftKey, rightKey });
+            return this;
         }
 
         public IFluentSqlQueryBuilder From(string primaryTableName)
@@ -116,6 +120,8 @@ namespace Fluent.SqlBuilder
                     .WithTableName(_primaryTableName)
                     .WithCustomColumn(_selectCustomColumn)
                     .WithSelectedColumns(_selectedColumns)
+                    .WithInnerJoinTables(_innerJoinTables)
+                    .WithLeftJoinTables(_leftJoinTables)
                     .Build(_selectType);
 
             var sqlFromStatement =
@@ -136,9 +142,31 @@ namespace Fluent.SqlBuilder
                 .WithSecondaryFilters(_filters)
                 .Build();
 
+            var sqlJoinStatment = new StringBuilder();
+
+            var tableAlias = _primaryTableName.TableNameAlias();
+
+            var joinIndex = 0;
+            if (_innerJoinTables.Any())
+            {
+                
+                foreach (var innerJoinTable in _innerJoinTables)
+                {
+                    var innerTableName = innerJoinTable.Key;
+                    var innerTableAlias = innerTableName.TableNameAlias() + joinIndex;
+                    var leftKey = innerJoinTable.Value[0];
+                    var rightKey = innerJoinTable.Value[1];                
+                    sqlJoinStatment.Append($" INNER JOIN [{innerTableName}] {innerTableAlias} ON {tableAlias}.{leftKey} = {innerTableAlias}.{rightKey}");
+                    joinIndex++;
+                }
+
+            }
+
+
             var sql = new StringBuilder();
             sql.Append(sqlSelectStatement);
             sql.Append(sqlFromStatement);
+            sql.Append(sqlJoinStatment);
             sql.Append(sqlWhereStatement);
             sql.Append(sqlOrderByStatement);
             return sql.ToString();
