@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 namespace Fluent.SqlBuilder
@@ -10,8 +11,9 @@ namespace Fluent.SqlBuilder
         private readonly ISqlSelectStatementBuilder _sqlSelectStatementBuilder;
         private readonly ISqlFromStatementBuilder _sqlFromStatementBuilder;
         private readonly ISqlOrderByStatementBuilder _sqlOrderByStatementBuilder;
+        private readonly ISqlWhereStatementBuilder _sqlWhereStatementBuilder;
 
-        private readonly IDictionary<string, string> _filters = new Dictionary<string, string>();
+        private readonly IList<string> _filters = new List<string>();
         private SqlSelectType _selectType = SqlSelectType.All;
         private SqlOrderType _orderType = SqlOrderType.Descending;
         private string[] _selectedColumns;
@@ -19,16 +21,17 @@ namespace Fluent.SqlBuilder
         private string _primaryTableName;
         private string _orderByColumn;
         private string _primaryFilterKey;
-        private object _primaryFilterValue;
 
         public FluentSqlQueryBuilder(
             ISqlSelectStatementBuilder sqlSelectStatementBuilder, 
             ISqlFromStatementBuilder sqlFromStatementBuilder, 
-            ISqlOrderByStatementBuilder sqlOrderByStatementBuilder)
+            ISqlOrderByStatementBuilder sqlOrderByStatementBuilder,
+            ISqlWhereStatementBuilder sqlWhereStatementBuilder)
         {
             _sqlSelectStatementBuilder = sqlSelectStatementBuilder;
             _sqlFromStatementBuilder = sqlFromStatementBuilder;
             _sqlOrderByStatementBuilder = sqlOrderByStatementBuilder;
+            _sqlWhereStatementBuilder = sqlWhereStatementBuilder;
         }
 
 
@@ -78,13 +81,12 @@ namespace Fluent.SqlBuilder
         public IFluentSqlQueryBuilder Where(string key)
         {
             _primaryFilterKey = key;
-            _primaryFilterValue = $"@{key}";
             return this;
         }
 
         public IFluentSqlQueryBuilder And(string key)
         {
-            _filters.Add(key, $"@{key}");
+            _filters.Add(key);
             return this;
         }
 
@@ -127,24 +129,17 @@ namespace Fluent.SqlBuilder
                   .WithColumnName(_orderByColumn)
                   .Build(_orderType);
 
-            var alias = _primaryTableName.TableNameAlias();
+            var sqlWhereStatement =
+                _sqlWhereStatementBuilder
+                .WithTableName(_primaryTableName)
+                .WithPrimaryFilter(_primaryFilterKey)
+                .WithSecondaryFilters(_filters)
+                .Build();
 
             var sql = new StringBuilder();
             sql.Append(sqlSelectStatement);
             sql.Append(sqlFromStatement);
-
-            if (!string.IsNullOrWhiteSpace(_primaryFilterKey))
-            {
-                var sqlWhereStatement = $" WHERE {alias}.{_primaryFilterKey} = {_primaryFilterValue}";
-                sql.Append(sqlWhereStatement);
-            }
-
-            if (_filters.Any())
-            {
-                var sqlAndStatements = $"{string.Concat(_filters.Select(f => $" AND {alias}.{f.Key} = {f.Value}")) }";
-                sql.Append(sqlAndStatements);
-            }
-
+            sql.Append(sqlWhereStatement);
             sql.Append(sqlOrderByStatement);
             return sql.ToString();
         }

@@ -45,6 +45,7 @@
     <Compile Include="ISqlFromStatementBuilder.cs" />
     <Compile Include="ISqlOrderByStatementBuilder.cs" />
     <Compile Include="ISqlSelectStatementBuilder.cs" />
+    <Compile Include="ISqlWhereStatementBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlFromStatementBuilder.cs" />
     <Compile Include="SqlJoinType.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="SqlSelectStatementBuilder.cs" />
     <Compile Include="SqlSelectType.cs" />
     <Compile Include="SqlStringExtensions.cs" />
+    <Compile Include="SqlWhereStatementBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

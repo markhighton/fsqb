@@ -16,7 +16,8 @@ namespace Fluent.SqlBuilderTests
             _builder = new FluentSqlQueryBuilder(
                 new SqlSelectStatementBuilder(), 
                 new SqlFromStatementBuilder(), 
-                new SqlOrderByStatementBuilder());
+                new SqlOrderByStatementBuilder(),
+                new SqlWhereStatementBuilder());
         }
 
         [TestMethod]
