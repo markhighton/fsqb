@@ -11,7 +11,7 @@ namespace Fluent.SqlBuilder
         private readonly ISqlFromStatementBuilder _sqlFromStatementBuilder;
         private readonly ISqlOrderByStatementBuilder _sqlOrderByStatementBuilder;
 
-        private readonly IDictionary<string, object> _filters = new Dictionary<string, object>();
+        private readonly IDictionary<string, string> _filters = new Dictionary<string, string>();
         private SqlSelectType _selectType = SqlSelectType.All;
         private SqlOrderType _orderType = SqlOrderType.Descending;
         private string[] _selectedColumns;
@@ -75,16 +75,16 @@ namespace Fluent.SqlBuilder
             return this;
         }
 
-        public IFluentSqlQueryBuilder Where(string key, object value)
+        public IFluentSqlQueryBuilder Where(string key)
         {
             _primaryFilterKey = key;
-            _primaryFilterValue = value;
+            _primaryFilterValue = $"@{key}";
             return this;
         }
 
-        public IFluentSqlQueryBuilder And(string key, object value)
+        public IFluentSqlQueryBuilder And(string key)
         {
-            _filters.Add(key, value);
+            _filters.Add(key, $"@{key}");
             return this;
         }
 

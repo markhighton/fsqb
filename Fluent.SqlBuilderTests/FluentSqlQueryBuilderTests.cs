@@ -121,10 +121,10 @@ namespace Fluent.SqlBuilderTests
             var sqlQuery = _builder
              .SelectAll()
              .From("TestTable")
-             .Where("TestCol", 1)
+             .Where("TestCol")
              .Build();
 
-            Assert.AreEqual("SELECT t.* FROM [TestTable] t WHERE t.TestCol = 1", sqlQuery);
+            Assert.AreEqual("SELECT t.* FROM [TestTable] t WHERE t.TestCol = @TestCol", sqlQuery);
         }
 
 
@@ -134,11 +134,11 @@ namespace Fluent.SqlBuilderTests
             var sqlQuery = _builder
              .SelectAll()
              .From("TestTable")
-             .Where("TestCol", 1)
-             .And("TestCol2", 2)
+             .Where("TestCol")
+             .And("TestCol2")
              .Build();
 
-            Assert.AreEqual("SELECT t.* FROM [TestTable] t WHERE t.TestCol = 1 AND t.TestCol2 = 2", sqlQuery);
+            Assert.AreEqual("SELECT t.* FROM [TestTable] t WHERE t.TestCol = @TestCol AND t.TestCol2 = @TestCol2", sqlQuery);
         }
     }
 }

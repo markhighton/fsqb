@@ -9,8 +9,8 @@
         IFluentSqlQueryBuilder InnerJoin(string innerTableName, string leftKey, string rightKey);
         IFluentSqlQueryBuilder LeftJoin(string leftTableName, string leftKey, string rightKey);
         IFluentSqlQueryBuilder From(string tableName);
-        IFluentSqlQueryBuilder Where(string key, object value);
-        IFluentSqlQueryBuilder And(string key, object value);
+        IFluentSqlQueryBuilder Where(string key);
+        IFluentSqlQueryBuilder And(string key);
         IFluentSqlQueryBuilder OrderBy(string columnName);
         IFluentSqlQueryBuilder OrderByDescending(string columnName);
         string Build();
