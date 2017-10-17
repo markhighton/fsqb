@@ -69,6 +69,11 @@ namespace Fluent.SqlBuilder
             var tableAliases = new List<string>();
             foreach (var innerJoinTable in _innerJoinTables)
             {
+                if (string.IsNullOrWhiteSpace(innerJoinTable.Key))
+                {
+                    continue;
+                }
+
                 var innerJoinAlias = innerJoinTable.Key.TableNameAlias();
                 var aliasSelect = $"{innerJoinAlias}{joinIndex}.*";
                 tableAliases.Add(aliasSelect);
@@ -77,6 +82,11 @@ namespace Fluent.SqlBuilder
 
             foreach (var leftJoinTable in _leftJoinTables)
             {
+                if (string.IsNullOrWhiteSpace(leftJoinTable.Key))
+                {
+                    continue;
+                }
+
                 var leftJoinAlias = leftJoinTable.Key.TableNameAlias();
                 var aliasSelect = $"{leftJoinAlias}{joinIndex}.*";
                 tableAliases.Add(aliasSelect);

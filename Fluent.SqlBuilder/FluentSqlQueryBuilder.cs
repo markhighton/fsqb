@@ -142,7 +142,7 @@ namespace Fluent.SqlBuilder
                 .WithSecondaryFilters(_filters)
                 .Build();
 
-            var sqlJoinStatment = new StringBuilder();
+            var sqlJoinStatement = new StringBuilder();
 
             var tableAlias = _primaryTableName.TableNameAlias();
 
@@ -151,12 +151,17 @@ namespace Fluent.SqlBuilder
             {
                 
                 foreach (var innerJoinTable in _innerJoinTables)
-                {
+                {               
                     var innerTableName = innerJoinTable.Key;
+                    if (string.IsNullOrEmpty(innerTableName))
+                    {
+                        continue;
+                    }
+
                     var innerTableAlias = innerTableName.TableNameAlias() + joinIndex;
                     var leftKey = innerJoinTable.Value[0];
-                    var rightKey = innerJoinTable.Value[1];                
-                    sqlJoinStatment.Append($" INNER JOIN [{innerTableName}] {innerTableAlias} ON {tableAlias}.{leftKey} = {innerTableAlias}.{rightKey}");
+                    var rightKey = innerJoinTable.Value[1];
+                    sqlJoinStatement.Append($" INNER JOIN [{innerTableName}] {innerTableAlias} ON {tableAlias}.{leftKey} = {innerTableAlias}.{rightKey}");
                     joinIndex++;
                 }
 
@@ -166,7 +171,7 @@ namespace Fluent.SqlBuilder
             var sql = new StringBuilder();
             sql.Append(sqlSelectStatement);
             sql.Append(sqlFromStatement);
-            sql.Append(sqlJoinStatment);
+            sql.Append(sqlJoinStatement);
             sql.Append(sqlWhereStatement);
             sql.Append(sqlOrderByStatement);
             return sql.ToString();
