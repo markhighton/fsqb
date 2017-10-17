@@ -143,7 +143,7 @@ namespace Fluent.SqlBuilderTests
         }
 
         [TestMethod]
-        public void Build_SelectAllColumnsFromMultipleTablesUsingInnerJoin_ItShouldBuildAValidSqlQuery()
+        public void Build_SelectAllColumnsFromASingleTableUsingInnerJoin_ItShouldBuildAValidSqlQuery()
         {
             var sqlQuery = _builder
                 .SelectAll()
@@ -152,6 +152,19 @@ namespace Fluent.SqlBuilderTests
                 .Build();
 
             Assert.AreEqual("SELECT t.*, t0.* FROM [TestTable] t INNER JOIN [TestTableInner] t0 ON t.TestTableKey1 = t0.TestTableInnerKey2",  sqlQuery);
+        }
+
+        [TestMethod]
+        public void Build_SelectAllColumnsFromMultipleTablesUsingInnerJoin_ItShouldBuildAValidSqlQuery()
+        {
+            var sqlQuery = _builder
+                .SelectAll()
+                .From("TestTable")
+                .InnerJoin("TestTableInner", "TestTableKey1", "TestTableInnerKey2")
+                .InnerJoin("TestTableInner2", "TestTableKey1", "TestTableInner2Key1")
+                .Build();
+
+            Assert.AreEqual("SELECT t.*, t0.*, t1.* FROM [TestTable] t INNER JOIN [TestTableInner] t0 ON t.TestTableKey1 = t0.TestTableInnerKey2 INNER JOIN [TestTableInner2] t1 ON t.TestTableKey1 = t1.TestTableInner2Key1", sqlQuery);
         }
     }
 }
