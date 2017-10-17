@@ -117,7 +117,8 @@ namespace Fluent.SqlBuilder
 
             if (_tableColumns == null || !_tableColumns.Any())
             {
-                return $"SELECT {_customColumn}, {alias}.*";
+                var joiningTables = _innerJoinTables.Any() || _leftJoinTables.Any() ? ", " + BuildSelectJoinColumns() : string.Empty;
+                return $"SELECT {_customColumn}, {alias}.*" + joiningTables;
             }
 
             var columnsWithAliasTag = _tableColumns.Select(column => $"{alias}.{column}");
