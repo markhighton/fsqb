@@ -1,5 +1,4 @@
 ﻿using System;
-using Fluent.SqlBuilder;
 using Fluent.SqlBuilder.Portable;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
