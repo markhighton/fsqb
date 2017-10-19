@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluent.SqlBuilder.Portable", "Fluent.SqlBuilder.Portable.csproj", "{CD8D3937-F69D-4179-9FCE-0CE3E240A090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fluent.SqlBuilderTests", "..\Fluent.SqlBuilderTests\Fluent.SqlBuilderTests.csproj", "{A089FABB-DECF-42E8-9C52-D9CE0552330C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CD8D3937-F69D-4179-9FCE-0CE3E240A090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8D3937-F69D-4179-9FCE-0CE3E240A090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8D3937-F69D-4179-9FCE-0CE3E240A090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8D3937-F69D-4179-9FCE-0CE3E240A090}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A089FABB-DECF-42E8-9C52-D9CE0552330C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A089FABB-DECF-42E8-9C52-D9CE0552330C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A089FABB-DECF-42E8-9C52-D9CE0552330C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A089FABB-DECF-42E8-9C52-D9CE0552330C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
