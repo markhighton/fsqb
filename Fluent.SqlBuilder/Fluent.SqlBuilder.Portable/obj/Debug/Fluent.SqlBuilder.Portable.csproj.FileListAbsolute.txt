@@ -1,0 +1,4 @@
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilder\Fluent.SqlBuilder.Portable\bin\Debug\Fluent.SqlBuilder.Portable.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilder\Fluent.SqlBuilder.Portable\bin\Debug\Fluent.SqlBuilder.Portable.pdb
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilder\Fluent.SqlBuilder.Portable\obj\Debug\Fluent.SqlBuilder.Portable.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilder\Fluent.SqlBuilder.Portable\obj\Debug\Fluent.SqlBuilder.Portable.pdb

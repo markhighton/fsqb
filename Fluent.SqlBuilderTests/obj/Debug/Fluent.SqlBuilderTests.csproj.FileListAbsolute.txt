@@ -11,3 +11,16 @@ D:\Fluent.SqlBuilderTests\bin\Debug\Moq.xml
 D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.csprojResolveAssemblyReference.cache
 D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.dll
 D:\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.pdb
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.csprojResolveAssemblyReference.cache
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\obj\Debug\Fluent.SqlBuilderTests.pdb
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilderTests.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilderTests.pdb
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Castle.Core.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Moq.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Castle.Core.xml
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Moq.pdb
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Moq.xml
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilder.Portable.dll
+D:\Other\Fluent.SqlQueryBuilder\Fluent.SqlBuilderTests\bin\Debug\Fluent.SqlBuilder.Portable.pdb

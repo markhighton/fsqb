@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fluent.SqlBuilder\Fluent.SqlBuilder.csproj">
-      <Project>{e4c45136-013e-4a78-9884-0ccd1dcd5389}</Project>
-      <Name>Fluent.SqlBuilder</Name>
+    <ProjectReference Include="..\Fluent.SqlBuilder\Fluent.SqlBuilder.Portable\Fluent.SqlBuilder.Portable.csproj">
+      <Project>{cd8d3937-f69d-4179-9fce-0ce3e240a090}</Project>
+      <Name>Fluent.SqlBuilder.Portable</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
