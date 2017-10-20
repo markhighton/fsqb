@@ -166,6 +166,25 @@ namespace Fluent.SqlBuilder.Portable
 
             }
 
+            if (_leftJoinTables.Any())
+            {
+                foreach (var leftJoinTable in _leftJoinTables)
+                {
+                    var innerTableName = leftJoinTable.Key;
+                    if (string.IsNullOrEmpty(innerTableName))
+                    {
+                        continue;
+                    }
+
+                    var leftTableAlias = innerTableName.TableNameAlias() + joinIndex;
+                    var leftKey = leftJoinTable.Value[0];
+                    var rightKey = leftJoinTable.Value[1];
+                    sqlJoinStatement.Append($" LEFT JOIN [{innerTableName}] {leftTableAlias} ON {tableAlias}.{leftKey} = {leftTableAlias}.{rightKey}");
+                    joinIndex++;
+                }
+
+            }
+
 
             var sql = new StringBuilder();
             sql.Append(sqlSelectStatement);

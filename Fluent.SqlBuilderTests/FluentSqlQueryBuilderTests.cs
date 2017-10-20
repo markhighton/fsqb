@@ -165,5 +165,19 @@ namespace Fluent.SqlBuilderTests
 
             Assert.AreEqual("SELECT t.*, t0.*, t1.* FROM [TestTable] t INNER JOIN [TestTableInner] t0 ON t.TestTableKey1 = t0.TestTableInnerKey2 INNER JOIN [TestTableInner2] t1 ON t.TestTableKey1 = t1.TestTableInner2Key1", sqlQuery);
         }
+
+
+        [TestMethod]
+        public void Build_SelectAllColumnsFromMultipleTablesUsingLeftJoin_ItShouldBuildAValidSqlQuery()
+        {
+            var sqlQuery = _builder
+                .SelectAll()
+                .From("TestTable")
+                .LeftJoin("TestTableLeft1", "TestTableKey1", "TestTableLeftKey1")
+                .LeftJoin("TestTableLeft2", "TestTableKey2", "TestTableLeft2Key2")
+                .Build();
+
+            Assert.AreEqual("SELECT t.*, t0.*, t1.* FROM [TestTable] t LEFT JOIN [TestTableLeft1] t0 ON t.TestTableKey1 = t0.TestTableLeftKey1 LEFT JOIN [TestTableLeft2] t1 ON t.TestTableKey2 = t1.TestTableLeft2Key2", sqlQuery);
+        }
     }
 }
